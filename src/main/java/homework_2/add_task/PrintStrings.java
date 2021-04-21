@@ -17,12 +17,28 @@ public class PrintStrings {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             String str;
             boolean bool = true;
+            boolean loops;
             while (bool) {
+                loops = true;
                 str = br.readLine();
                 if (str.toLowerCase().equals("end")) {
                     break;
                 }
-                ps.addToList(str);
+                while (loops) {
+                    for (String st : ps.list) {
+                        if (str.equals(st)) {
+                            loops = false;
+                            System.out.println("this is string already exist");
+                            break;
+                        }
+                    }
+                    if (loops == false) {
+                        break;
+                    } else {
+                        ps.addToList(str);
+                        break;
+                    }
+                }
             }
             Collections.sort(ps.list);
             for (String st : ps.list) {

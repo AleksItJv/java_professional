@@ -53,7 +53,7 @@ public class Animal implements Comparable { // <Animal>{
 
     // Сортируем по скорости/цене - > модели -> цвету машины
     public int compareTo(Object obj) {              //    public int compareTo(Animal o) {
-        int nextCompare = this.speed - ((Animal) obj).speed; //    int tmp = this.speed - o.speed;
+/*        int nextCompare = this.speed - ((Animal) obj).speed; //    int tmp = this.speed - o.speed;
         if (nextCompare == 0) {
             int nextCompare2 = this.price - ((Animal) obj).price;
             if (nextCompare2 == 0) {
@@ -66,7 +66,8 @@ public class Animal implements Comparable { // <Animal>{
             return nextCompare2;
         } else {
             return nextCompare;
-        }
+        }*/
+        return Comparator.comparing(Animal::getWeight).thenComparing(Animal::getBreed).thenComparing(Animal::getPrice).thenComparing(Animal::getSpeed).compare(this, (Animal)obj);
     }
 
     // Сравнение 2-х строковых значений
