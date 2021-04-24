@@ -1,4 +1,4 @@
-package honework_3.task2;
+package homework_3.task2;
 
 import java.util.EnumMap;
 import java.util.Map;
