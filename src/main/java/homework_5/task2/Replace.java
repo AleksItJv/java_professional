@@ -35,7 +35,6 @@ public class Replace {
         String tmp = miniarr[0];
         miniarr[0] = miniarr[miniarr.length - 1];
         miniarr[miniarr.length - 1] = tmp;
-        String ret = miniarr.toString();
 
         for (String s1 : miniarr) {
             bild.append(s1).append(" ");
