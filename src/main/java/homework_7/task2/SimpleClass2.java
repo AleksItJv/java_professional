@@ -4,14 +4,15 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.Scanner;
 
 public class SimpleClass2 {
 
-    public static void main(String[] args) {
+        public static void main(String[] args) throws ClassNotFoundException {
 
-        /*Scanner sc = new Scanner(System.in);
-        String className = sc.next();*/
-        Class<?> cl = Date.class;
+        Scanner sc = new Scanner(System.in);
+        String className = sc.next();
+        Class<?> cl = Class.forName(className);
         System.out.println(cl);
         System.out.println("-----Fields-----");
         Field[] fl = cl.getDeclaredFields();
