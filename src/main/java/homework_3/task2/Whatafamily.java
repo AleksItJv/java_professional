@@ -9,10 +9,10 @@ public class Whatafamily {
     public static void main(String[] args) {
 
         Map<Town, String> townMap = new EnumMap<Town, String>(Town.class);
-        townMap.put(Town.MOSKOV, "Ивановы");
-        townMap.put(Town.KIEV, "Петровы");
-        townMap.put(Town.LONDON, "Абрамовичи");
-        townMap.put(Town.MADRID, "Хохловы");
+        townMap.put(Town.MOSKOV, "Ivanovi");
+        townMap.put(Town.KIEV, "Petrovi");
+        townMap.put(Town.LONDON, "Abromovichi");
+        townMap.put(Town.MADRID, "Hohlovi");
 
         Set set = townMap.entrySet();
 
@@ -25,7 +25,7 @@ public class Whatafamily {
 
 enum Town {
 
-    MOSKOV("Москва"), KIEV("Киев"), LONDON("Лондон"), MADRID("Мадрид");
+    MOSKOV("Moskov"), KIEV("Kyev"), LONDON("London"), MADRID("Madrid");
 
     String nameOfTown;
 
@@ -38,9 +38,3 @@ enum Town {
         return nameOfTown;
     }
 }
-/*Программа определяет, какая семья (фамилия) живёт в городе.
-Пример ввода:
-Москва - Ивановы
-Киев - Петровы
-Лондон - Абрамовичи
-*/
