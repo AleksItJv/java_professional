@@ -4,11 +4,20 @@ package homework_8.task2;
  * @author Alexander
  */
 
+import homework_8.MyAnnotationDoc;
 import homework_8.task2.annotation.CalculatorValues;
 
 import java.lang.reflect.Method;
 import java.util.Scanner;
 
+@MyAnnotationDoc(
+        author = "Alexander",
+        date = "05/05/2021",
+        currentRevision = 1,
+        lastModified = "05/05/2021",
+        lastModifiedBy = "Alexander Kalyuzhniy",
+        reviewers = {"Alexander", "Denis"}
+)
 public class CalculatorRuntime {
     /**
      * @param args
@@ -17,10 +26,10 @@ public class CalculatorRuntime {
 
         CalculatorMethods calcAnno = new CalculatorMethods();
         Class<?> cl = CalculatorMethods.class;
-/*        Method[] methods = cl.getDeclaredMethods();
+        Method[] methods = cl.getDeclaredMethods();
         for (Method mt : methods) {
-            System.out.println(mt.getName());
-        }*/
+            //System.out.println(mt.getName());
+        }
         try {
             Method method1 = cl.getDeclaredMethod("additionNumbers", int.class, int.class);
             Method method2 = cl.getDeclaredMethod("subtractionNumbers", int.class, int.class);
@@ -59,8 +68,6 @@ public class CalculatorRuntime {
                     break;
                 }
             }
-
-
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
