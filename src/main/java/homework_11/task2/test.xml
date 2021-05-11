@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<country>
+    <city size="big">
+        <name>Kyev</name>
+        <street>Gorky str</street>
+        <house>30</house>
+    </city>
+    <city size="big">
+        <name>Odessa</name>
+        <street>Deribasovska str</street>
+        <house>66</house>
+    </city>
+    <city size="small">
+        <name>Kherson<!--south--></name>
+        <street>Nekrasova str</street>
+        <house>13</house>
+    </city>
+</country>
