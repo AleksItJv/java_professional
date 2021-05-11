@@ -1,44 +1,32 @@
 package homework_6.task2;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class Decoder {
 
     public static void main(String[] args) {
-        String src = "test.txt";
-        String st = "";
-        String src2 = "test2.txt";
-        int capacity = 20;
-        char[] arr = new char[capacity];
+        String src = "D:\\JAVA\\java_professional\\test.txt";
+        String src2 = "D:\\JAVA\\java_professional\\test2.txt";
+
         BufferedReader br = null;
+        BufferedWriter bw = null;
+
         try {
-            br = new BufferedReader(new FileReader("test.txt"));
+            br = new BufferedReader(new FileReader(src));
+            bw = new BufferedWriter(new FileWriter(src2));
 
-            int c;
-            while ((c = br.read(arr)) > 0) {
-                if (c < 20){
-                    arr = Arrays.copyOf(arr, c+capacity);
-                }
-
-
+            int tmp;
+            String str = "";
+            while ((tmp = br.read()) > 0){
+                str += (char) tmp;
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(arr);
-        //System.out.println(st);
-        try(
-            BufferedWriter bw = new BufferedWriter(new FileWriter(src2))){
-            //bw.write(st);
-            bw.write(arr);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            String newstr = str.replaceAll("(\\b[a-z]{2}[\\s?|\\W?])|(\\b[a-z][\\s?|\\W?])|(\\bthe\\b)|(\\band\\b)", "JAVA ");
+            bw.write(newstr);
+
+            bw.flush();
+            bw.close();
+            br.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
