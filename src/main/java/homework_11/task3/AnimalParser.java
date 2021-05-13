@@ -60,7 +60,7 @@ public class AnimalParser {
             Transformer tr = tf.newTransformer();
 
             DOMSource source = new DOMSource(doc);
-            StreamResult streamResult = new StreamResult("D:\\JAVA\\java_professional\\src\\main\\java\\homework_11\\task3\\AnimalParser.xml");
+            StreamResult streamResult = new StreamResult("D:\\JAVA\\java_professional\\src\\main\\java\\homework_11\\task3\\AnimalPars.xml");
             tr.transform(source, streamResult);
 
         } catch (ParserConfigurationException | TransformerException e) {
