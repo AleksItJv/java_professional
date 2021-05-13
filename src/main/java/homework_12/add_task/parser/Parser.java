@@ -5,9 +5,6 @@ import homework_12.add_task.entity.Currency;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 public class Parser {
 
@@ -28,8 +25,10 @@ public class Parser {
 
         }
 
+/*
         String str = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(currencys);
         Files.write(Paths.get("D:\\JAVA\\java_professional\\src\\main\\resources\\currence.json"), str.getBytes(), StandardOpenOption.CREATE);
+*/
 
     }
 }

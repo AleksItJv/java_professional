@@ -11,6 +11,3 @@ public class Main {
     }
 
 }
-/*Создайте классы Currency, Parser, Main
-Подключиться к NBU API(https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json)
-и вывести в консоль значения золота, фунта стерлингов и форинта.*/
