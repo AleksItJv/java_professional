@@ -37,7 +37,7 @@ public class Llist<T>{
 
     void addElement(T element) {
 
-        if (isEmpty()) {
+        if (size == 0) {
             Node<T> firstNode = new Node<>(element);
             firstNode.next = null;
             firstNode.prev = null;
