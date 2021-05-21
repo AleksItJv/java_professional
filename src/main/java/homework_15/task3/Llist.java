@@ -3,8 +3,8 @@ package homework_15.task3;
 public class Llist<T>{
 
     private int indexNode;
-    private transient Node<T> first;
-    private transient Node<T> last;
+    private  Node<T> first;
+    private  Node<T> last;
     int size;
 
     class Node<E> {
@@ -28,13 +28,6 @@ public class Llist<T>{
         }
     }
 
-    boolean isEmpty(){
-        if (size == 0){
-
-        }
-        return true;
-    }
-
     void addElement(T element) {
 
         if (size == 0) {
@@ -55,6 +48,13 @@ public class Llist<T>{
                 size++;
             }
         }
+    }
+
+
+    boolean isEmpty(){
+        if (size == 0){
+        }
+        return true;
     }
 
     @Override
