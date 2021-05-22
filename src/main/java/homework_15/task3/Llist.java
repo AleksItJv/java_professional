@@ -1,69 +1,287 @@
 package homework_15.task3;
 
-public class Llist<T>{
+import java.util.Objects;
 
-    private int indexNode;
-    private  Node<T> first;
-    private  Node<T> last;
-    int size;
+public class Llist<T> implements LinkInt, Cloneable {
 
-    class Node<E> {
-        int index;
-        Node<E> prev;
-        Node<E> next;
-        E element;
+    private Node<T> first;
+    private Node<T> last;
+    private int size;
 
-        public Node(E element) {
-            this.index = size;
-            this.element = element;
+    Node<T> instanceNode(int index) {
+        Node<T> nodeIndex = first;
+        for (int i = 0; i < index; i++) {
+            nodeIndex = nodeIndex.next;
         }
-
-        @Override
-        public String toString() {
-            return "Node" + index +
-                    "[el:" + element +
-                    ", Prev:" + prev +
-                    ", next=" + next +
-                    ']';
-        }
+        return nodeIndex;
     }
 
-    void addElement(T element) {
+    @Override
+    public void add(int index, Object element) {
+        indexCorrect(index);
+        Node<T> indexNode = new Node<>((T) element);
+        indexNode.next = instanceNode(index);
+        indexNode.prev = instanceNode(index - 1);
+        instanceNode(index).prev = indexNode;
+        instanceNode(index - 1).next = indexNode;
+        size++;
+    }
 
+    @Override
+    public void addLast(Object element) {
         if (size == 0) {
-            Node<T> firstNode = new Node<>(element);
+            Node<T> firstNode = new Node<>((T) element);
             firstNode.next = null;
             firstNode.prev = null;
             first = firstNode;
             last = firstNode;
             size++;
-        } else {
-            if (first != null) {
-                Node<T> nextNode = new Node<>(element);
-                Node<T> tmp = last;
-                nextNode.prev = last;
-                nextNode.next = null;
-                //last.next = nextNode;
-                last = nextNode;
-                size++;
-            }
+            return;
+        }
+        if (first != null) {
+            Node<T> nextNode = new Node<>((T) element);
+            last.next = nextNode;
+            nextNode.prev = last;
+            nextNode.next = null;
+            last = nextNode;
+            size++;
         }
     }
 
+    @Override
+    public void add(Object o) {
+        addLast(o);
+    }
 
-    boolean isEmpty(){
-        if (size == 0){
+    @Override
+    public void addFirst(Object element) {
+        Node<T> addNode = new Node<>((T) element);
+        addNode.prev = null;
+        addNode.next = first;
+        first.prev = addNode;
+        first = addNode;
+        size++;
+    }
+
+    boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public void clear() {
+        for (int i = size - 1; i > 0; i--) {
+            remove(i);
         }
-        return true;
+        if (size == 1) {
+            first = null;
+            last = null;
+            size = 0;
+        }
+    }
+
+    @Override
+    public Object clone() {
+        Llist<T> clone = superClone();
+        return clone;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Llist<T> superClone() {
+        try {
+            return (Llist<T>) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError(e);
+        }
+    }
+
+    @Override
+    public boolean contains(Object object) {
+        Node<T> containsNode = first;
+        boolean result = false;
+        for (int i = 0; i < size; i++) {
+            if (containsNode.element.equals(object)) {
+                result = true;
+                break;
+            }
+            if (containsNode.next == null) {
+                //throw new NullPointerException();
+            } else {
+                containsNode = containsNode.next;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public T get(int index) {
+        indexCorrect(index);
+        Node<T> find = first;
+        for (int i = 0; i < index; i++) {
+            find = find.next;
+        }
+        return find.element;
+    }
+
+    @Override
+    public Object getFirst() {
+        return first;
+    }
+
+    @Override
+    public Object getLast() {
+        return last;
+    }
+
+    @Override
+    public int indexOf(Object object) {
+        Node find = first;
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            if (find.element.equals(object)) {
+                index = i;
+                break;
+            }
+            find = find.next;
+        }
+        return index;
+    }
+
+    @Override
+    public int lastIndexOf(Object object) {
+        Node<T> find = last;
+        int index = 0;
+        for (int i = size - 1; i >= 0; i--) {
+            if (find.element.equals(object)) {
+                index = i;
+                break;
+            }
+            find = find.prev;
+        }
+        return index;
+    }
+
+    @Override
+    public Object remove(int index) {
+        Node<T> removeNode = first;
+        for (int i = 0; i < index; i++) {
+            removeNode = removeNode.next;
+        }
+        if (removeNode.prev == null) {
+            removeNode.next.prev = null;
+            first = removeNode.next;
+        } else {
+            if (removeNode.next == null) {
+                removeNode.prev.next = null;
+                last = removeNode.prev;
+            } else {
+                removeNode.next.prev = removeNode.prev;
+                removeNode.prev.next = removeNode.next;
+            }
+        }
+        size--;
+        return removeNode;
+    }
+
+    @Override
+    public int remove(Object object) {
+        Node<T> removeNode = first;
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            if (removeNode.element.equals(object)) {
+                index = i;
+                break;
+            }
+            removeNode = removeNode.next;
+        }
+        removeNode.next.prev = removeNode.prev;
+        removeNode.prev.next = removeNode.next;
+        size--;
+        return index;
+    }
+
+    @Override
+    public void set(int index, Object element) {
+        Node<T> settingNode = first;
+        for (int i = 0; i < index; i++) {
+            settingNode = settingNode.next;
+        }
+        settingNode.element = (T) element;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    private void indexCorrect(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(index);
+        }
     }
 
     @Override
     public String toString() {
         return "Llist{" +
-                //"indexNode=" + indexNode +
-                ", first=" + first + "\n" +
-                ", last=" + last + "\n" +
-                //", size=" + size + "\n" +
-                '}';
+                "first=" + first + ", last=" + last + '}';
     }
+
+    class Node<E> {
+        Node<E> prev;
+        Node<E> next;
+        E element;
+
+        public Node(E element) {
+            this.element = element;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node<?> node = (Node<?>) o;
+            return Objects.equals(prev, node.prev) && Objects.equals(next, node.next) && Objects.equals(element, node.element);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(prev, next, element);
+        }
+
+        @Override
+        public String toString() {
+            return "Node" + "[" + element + ']';
+        }
+    }
+
+    @Override
+    public Object iterator() {
+        return (Object) new Iterattt<>();
+    }
+
+    class Iterattt<E> implements Iter {
+
+        Node<T> nextIt;
+        Node<T> prevIt;
+        int cursor;
+
+        @Override
+        public T next() {
+            Node<T> lastReturned = null;
+            if (hasNext()) {
+                if (cursor == 0) {
+                    nextIt = first;
+                }
+                lastReturned = nextIt;
+                nextIt = nextIt.next;
+                cursor++;
+            }
+            return lastReturned.element;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return cursor < size;
+        }
+    }
+
 }
