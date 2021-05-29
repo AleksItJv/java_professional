@@ -167,7 +167,7 @@ public class HashMP<K, V> implements HashMapa {
                 tmp = hashTable[i];
                 while (tmp.next != null) {
                     if (tmp.key.equals(key)) {
-                        if(tmp.next == null){
+                        if (tmp.next == null) {
                             prev.next = null;
                         } else {
                             prev.next = tmp.next;
@@ -179,7 +179,7 @@ public class HashMP<K, V> implements HashMapa {
                     prev = tmp;
                     tmp = tmp.next;
                 }
-                if(tmp.next == null){
+                if (tmp.next == null) {
                     prev.next = null;
                 } else {
                     prev.next = tmp.next;
