@@ -2,7 +2,7 @@ package homework_15.task3;
 
 import java.util.Objects;
 
-public class Llist<T> implements LinkInt, Cloneable {
+public class Llist<T> implements LinkInt<T>, Cloneable {
 
     private Node<T> first;
     private Node<T> last;
@@ -19,7 +19,7 @@ public class Llist<T> implements LinkInt, Cloneable {
     @Override
     public void add(int index, Object element) {
         indexCorrect(index);
-        Node<T> indexNode = new Node<>((T) element);
+        Node<T> indexNode = new Node(element);
         indexNode.next = instanceNode(index);
         indexNode.prev = instanceNode(index - 1);
         instanceNode(index).prev = indexNode;
@@ -30,7 +30,7 @@ public class Llist<T> implements LinkInt, Cloneable {
     @Override
     public void addLast(Object element) {
         if (size == 0) {
-            Node<T> firstNode = new Node<>((T) element);
+            Node<T> firstNode = new Node(element);
             firstNode.next = null;
             firstNode.prev = null;
             first = firstNode;
@@ -55,7 +55,7 @@ public class Llist<T> implements LinkInt, Cloneable {
 
     @Override
     public void addFirst(Object element) {
-        Node<T> addNode = new Node<>((T) element);
+        Node<T> addNode = new Node(element);
         addNode.prev = null;
         addNode.next = first;
         first.prev = addNode;
@@ -123,13 +123,13 @@ public class Llist<T> implements LinkInt, Cloneable {
     }
 
     @Override
-    public Object getFirst() {
-        return first;
+    public T getFirst() {
+        return first.element;
     }
 
     @Override
-    public Object getLast() {
-        return last;
+    public T getLast() {
+        return last.element;
     }
 
     @Override
@@ -161,7 +161,7 @@ public class Llist<T> implements LinkInt, Cloneable {
     }
 
     @Override
-    public Object remove(int index) {
+    public T remove(int index) {
         Node<T> removeNode = first;
         for (int i = 0; i < index; i++) {
             removeNode = removeNode.next;
@@ -179,7 +179,7 @@ public class Llist<T> implements LinkInt, Cloneable {
             }
         }
         size--;
-        return removeNode;
+        return removeNode.element;
     }
 
     @Override
@@ -200,12 +200,12 @@ public class Llist<T> implements LinkInt, Cloneable {
     }
 
     @Override
-    public void set(int index, Object element) {
+    public void set(int index, T element) {
         Node<T> settingNode = first;
         for (int i = 0; i < index; i++) {
             settingNode = settingNode.next;
         }
-        settingNode.element = (T) element;
+        settingNode.element = element;
     }
 
     @Override
@@ -225,12 +225,12 @@ public class Llist<T> implements LinkInt, Cloneable {
                 "first=" + first + ", last=" + last + '}';
     }
 
-    class Node<E> {
-        Node<E> prev;
-        Node<E> next;
-        E element;
+    class Node<T> {
+        Node<T> prev;
+        Node<T> next;
+        T element;
 
-        public Node(E element) {
+        public Node(T element) {
             this.element = element;
         }
 
@@ -254,11 +254,11 @@ public class Llist<T> implements LinkInt, Cloneable {
     }
 
     @Override
-    public Object iterator() {
-        return (Object) new Iterattt<>();
+    public T iterator() {
+        return (T) new Iterattt();
     }
 
-    class Iterattt<E> implements Iter {
+    class Iterattt implements Iter {
 
         Node<T> nextIt;
         Node<T> prevIt;

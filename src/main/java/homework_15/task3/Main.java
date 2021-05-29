@@ -65,6 +65,5 @@ public class Main {
         while (it.hasNext()) {
             System.out.print(it.next() + " ");
         }
-
     }
 }
