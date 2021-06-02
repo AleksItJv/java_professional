@@ -13,16 +13,17 @@ public class Main {
         hm.put("forth", 1000);
         hm.put("forth39", 127);
         System.out.println("---------------");
+        System.out.println(hm.keySet());
 
         System.out.println(hm.containsKey("second"));
         System.out.println(hm.containsKey("forth"));
         System.out.println(hm.containsKey("forth39"));
-        System.out.println(hm.remove("forth"));
+        //System.out.println(hm.remove("forth"));
 
         System.out.println(hm);
         System.out.println(hm.size());
         System.out.println(hm.get("forth"));
-        System.out.println(hm.keySet());
+
         System.out.println("entrySet" + hm.entrySet());
         hm.clear();
         System.out.println(hm);

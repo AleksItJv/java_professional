@@ -3,13 +3,13 @@ package homework_15.task4;
 import java.util.Map;
 import java.util.Set;
 
-public interface HashMapa<K, V> {
+public interface MyMap<K, V> {
 
     void clear();
 
-    boolean containsKey(Object key);
+    boolean containsKey(K key);
 
-    boolean containsValue(Object value);
+    boolean containsValue(V value);
 
     Set<Map.Entry<K, V>> entrySet();
 
@@ -19,7 +19,7 @@ public interface HashMapa<K, V> {
 
     Set<K> keySet();
 
-    Object put(K key, V value);
+    V put(K key, V value);
 
     V remove(K key);
 
